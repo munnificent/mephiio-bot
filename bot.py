@@ -21,16 +21,16 @@ def resource_path(relative_path):
 
 bot = telebot.TeleBot('5725077388:AAENT--CKUVwwRxLA6gDQB2yHG17lqZ14NU')
 
-today1 = date.today()
-tomorrow = today1 + datetime.timedelta(days=1)
-sample_time = {today1}
-sample_time2 = {tomorrow}
-json_str = json.dumps(sample_time, default=str)
-json_str2 = json.dumps(sample_time2, default=str)
+
+today1 = datetime.datetime.today().weekday()
+tomorrow1 = today1 + 1
+today2 = str(today1)
+tomorrow2 = str(tomorrow1)
+
 
 mas = []
-if os.path.exists('dic/schedule.txt'):
-    f = open('dic/schedule.txt', 'r', encoding='UTF-8')
+if os.path.exists('dic/corect.txt'):
+    f = open('dic/corect.txt', 'r', encoding='UTF-8')
     for x in f:
         if (len(x.strip()) > 2):
             mas.append(x.strip().lower())
@@ -40,13 +40,10 @@ with open('dic/part.txt', 'r', encoding='UTF-8') as f: ## Открываем ф�
     my_lines = list(f) ## Помещаем в список.
 derek = my_lines[0]
 
-f_read = open("dic/corect.txt", 'r', encoding='UTF-8')
-last_line = f_read.readlines()[0]
-
 def answer(text):
     try:
         text = text.lower().strip()
-        if os.path.exists('dic/schedule.txt'):
+        if os.path.exists('dic/corect.txt'):
             a = 0
             n = 0
             nn = 0
@@ -65,8 +62,12 @@ def answer(text):
     except:
         return 'Ошибка'
 
-answer2 = answer(json_str)
-answer1 = answer(json_str2)
+
+
+
+
+answer1= answer(today2)
+answer2 = answer(tomorrow2)
 
 
 
@@ -106,16 +107,62 @@ def menu(message):
         else:
 		        bot.send_message(message.chat.id, "Я не знаю что и ответить")
 
+
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
     try:
         if call.message:
             if call.data == 'book1':
-                bot.send_message(call.message.chat.id, answer2)
+                if today1 == 0:
+                    img = open('pic/monday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif today1 == 1:
+                    img = open('pic/tuesday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif today1 == 2:
+                    img = open('pic/wednesday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif today1 == 3:
+                    img = open('pic/thursday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif today1 == 4:
+                    img = open('pic/friday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif today1 == 5:
+                    img = open('pic/saturday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif today1 == 6:
+                    img = open('pic/saturday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                else:
+                    bot.send_message(call.message.chat.id, "Ошибка")
             elif call.data == 'book2':
-                bot.send_message(call.message.chat.id, answer1)
+                if tomorrow1 == 0:
+                    img = open('pic/monday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif tomorrow1 == 1:
+                    img = open('pic/tuesday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif tomorrow1 == 2:
+                    img = open('pic/wednesday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif tomorrow1 == 3:
+                    img = open('pic/thursday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif tomorrow1 == 4:
+                    img = open('pic/friday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif tomorrow1 == 5:
+                    img = open('pic/saturday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                elif tomorrow1 == 6:
+                    img = open('pic/saturday.png', 'rb')
+                    bot.send_photo(call.message.chat.id, img)
+                else:
+                    bot.send_message(call.message.chat.id, "Error")
             elif call.data == 'book3':
-                bot.send_message(call.message.chat.id, last_line)
+                    bot.send_message(call.message.chat.id, answer1)
+                    bot.send_message(call.message.chat.id, answer2)
             
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Что именно интересует",reply_markup=None)
             bot.answer_callback_query(callback_query_id=call.id, show_alert=False,
