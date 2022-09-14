@@ -7,6 +7,8 @@ import telebot
 from datetime import date
 from datetime import datetime
 import datetime
+import requests
+from bs4 import BeautifulSoup as BS
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -21,7 +23,7 @@ bot = telebot.TeleBot(API_TOKEN)
 admins = [736503376]
 
 # работа с ip
-joinedFile = open('data/ed.txt','r')
+joinedFile = open('data/id.txt','r')
 joinedUsers = set()
 for line in joinedFile:
     joinedUsers.add(line.strip())
@@ -36,7 +38,7 @@ def day(number):
 @bot.message_handler(commands=['start'])
 def startJoin(message):
     if not str(message.chat.id) in joinedUsers:
-        joinedFile = open('data/ed.txt', 'a')
+        joinedFile = open('data/id.txt', 'a')
         joinedFile .write(str(message.chat.id) + '\n')
         joinedUsers.add(message.chat.id)
     
@@ -49,6 +51,29 @@ def startJoin(message):
     stic = open('stic/welcome.tgs', 'rb')
     bot.reply_to(message, "Привет, {0.first_name}\nЧем могу помочь?".format(message.from_user),parse_mode='html',reply_markup=markup)
     bot.send_sticker(message.chat.id,stic)
+
+# рассылка
+@bot.message_handler(commands=['send'])
+def notify(message):
+    command_sender = message.from_user.id
+    if command_sender in admins:
+        msg = message.text[len('/send'):]
+        with open(r'data/id.txt') as ids:
+            for line in ids:
+                user_id = int(line.strip("\n"))
+                try:
+                    bot.send_message(user_id,  f'Сообщение\n<b>{msg}<b>\n от</b> {command_sender}</b>', parse_mode='html')
+                except Exception as e:
+                    bot.send_message(command_sender, f'ошибка отправки сообщения юзеру - <b>{user_id}</b>', parse_mode='html')
+    else:
+        bot.send_message(command_sender, f'у вас нет прав для запуска команды')
+
+
+if __name__ == "__main__":
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        pass
 
 #расписание меню
 @bot.message_handler(func=lambda message: True)
@@ -153,29 +178,5 @@ def callback_inline(call):
     except Exception as e:
 		    print(repr(e))
 
-# рассылка
-@bot.message_handler(commands=['send'])
-def notify(message):
-    command_sender = message.from_user.id
-    if command_sender in admins:
-        msg = message.text[len('/send'):]
-        with open(r'data/id.txt') as ids:
-            for line in ids:
-                user_id = int(line.strip("\n"))
-                try:
-                    bot.send_message(user_id,  f'Сообщение\n<b>{msg}<b>\n от</b> {command_sender}</b>', 
-                                     parse_mode='html')
-                except Exception as e:
-                    bot.send_message(command_sender, f'ошибка отправки сообщения юзеру - <b>{user_id}</b>', 
-                                     parse_mode='html')
-    else:
-        bot.send_message(command_sender, f'у вас нет прав для запуска команды')
-
-
-if __name__ == "__main__":
-    try:
-        bot.polling(none_stop=True)
-    except Exception as e:
-        pass
 
 bot.polling(none_stop=True, interval=0)
