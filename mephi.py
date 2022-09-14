@@ -137,8 +137,12 @@ def callback_inline(call):
                 with open('dic/corect.txt', 'r', encoding='UTF-8') as f: ## Открываем файл
                     my_lines = list(f) ## Помещаем в список.
                 today1 = day(1)
-                corection1 = my_lines[today1]
-                corection2 = my_lines[today1 + 1 ]
+                if today1 == 6:
+                    corection1 = my_lines[today1]
+                    corection2 = my_lines[0]
+                else:
+                    corection1 = my_lines[today1]
+                    corection2 = my_lines[today1 + 1 ]
 
                 bot.send_message(call.message.chat.id, corection1)
                 bot.send_message(call.message.chat.id, corection2)
@@ -154,10 +158,19 @@ def callback_inline(call):
 def notify(message):
     command_sender = message.from_user.id
     if command_sender in admins:
-        for user in joinedUsers:
-            bot.send_message(user, message.text[message.text.find(' '):])
+        msg = message.text[len('/send'):]
+        with open(r'data/id.txt') as ids:
+            for line in ids:
+                user_id = int(line.strip("\n"))
+                try:
+                    bot.send_message(user_id,  f'Сообщение\n<b>{msg}<b>\n от</b> {command_sender}</b>', 
+                                     parse_mode='html')
+                except Exception as e:
+                    bot.send_message(command_sender, f'ошибка отправки сообщения юзеру - <b>{user_id}</b>', 
+                                     parse_mode='html')
     else:
         bot.send_message(command_sender, f'у вас нет прав для запуска команды')
+
 
 if __name__ == "__main__":
     try:
