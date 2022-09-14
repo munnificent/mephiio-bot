@@ -69,11 +69,6 @@ def notify(message):
         bot.send_message(command_sender, f'у вас нет прав для запуска команды')
 
 
-if __name__ == "__main__":
-    try:
-        bot.polling(none_stop=True)
-    except Exception as e:
-        pass
 
 #расписание меню
 @bot.message_handler(func=lambda message: True)
@@ -177,6 +172,12 @@ def callback_inline(call):
 				text='Встретимся на занятиях')
     except Exception as e:
 		    print(repr(e))
+
+if __name__ == "__main__":
+    try:
+        bot.polling(none_stop=True)
+    except Exception as e:
+        pass
 
 
 bot.polling(none_stop=True, interval=0)
