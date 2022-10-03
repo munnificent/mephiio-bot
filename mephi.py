@@ -66,7 +66,7 @@ def day(number):
 def startJoin(message):
     if not str(message.chat.id) in joinedUsers:
         joinedFile = open('data/id.txt', 'a')
-        joinedFile .write(str(message.chat.id) + '\n')
+        joinedFile.write(str(message.chat.id) + '\n')
         joinedUsers.add(message.chat.id)
     
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -342,25 +342,25 @@ def callback_inline(call):
             elif call.data == 'group1':
                 if not str(call.message.chat.id) in joinedUsers1:
                     joinedFile1 = open('data/atom.txt', 'a')
-                    joinedFile1 .write(str(call.message.chat.id) + '\n')
+                    joinedFile1.write(str(call.message.chat.id) + '\n')
                     joinedUsers1.add(call.message.chat.id)
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Выберите группу",reply_markup=None)            
             elif call.data == 'group2':
                 if not str(call.message.chat.id) in joinedUsers2:
                     joinedFile2 = open('data/it1.txt', 'a')
-                    joinedFile2 .write(str(call.message.chat.id) + '\n')
+                    joinedFile2.write(str(call.message.chat.id) + '\n')
                     joinedUsers2.add(call.message.chat.id)
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Выберите группу",reply_markup=None)
             elif call.data == 'group3':
                 if not str(call.message.chat.id) in joinedUsers3:
                     joinedFile3 = open('data/it2.txt', 'a')
-                    joinedFile3 .write(str(call.message.chat.id) + '\n')
+                    joinedFile3.write(str(call.message.chat.id) + '\n')
                     joinedUsers3.add(call.message.chat.id)
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Выберите группу",reply_markup=None)
             elif call.data == 'group4':
                 if not str(call.message.chat.id) in joinedUsers4:
                     joinedFile4 = open('data/it3.txt', 'a')
-                    joinedFile4 .write(str(call.message.chat.id) + '\n')
+                    joinedFile4.write(str(call.message.chat.id) + '\n')
                     joinedUsers4.add(call.message.chat.id)
                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Выберите группу",reply_markup=None)
             elif call.data == 'data3':
