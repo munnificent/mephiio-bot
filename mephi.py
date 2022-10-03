@@ -32,8 +32,8 @@ joinedFile.close()
 # работа с ip
 joinedFile1 = open('data/atom.txt','r')
 joinedUsers1 = set()
-for line in joinedFile1:
-    joinedUsers1.add(line.strip())
+for line1 in joinedFile1:
+    joinedUsers1.add(line1.strip())
 joinedFile1.close()
 
 # работа с ip
