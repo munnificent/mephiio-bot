@@ -155,7 +155,6 @@ def menu(message):
 def callback_inline(call):
     try:
         if call.message:
-            
             with open('data/atom.txt', 'r', encoding='UTF-8') as fa: ## Открываем файл
                 test = list(fa) ## Помещаем в список.
                 test1 = list(map(int, test))
@@ -171,6 +170,7 @@ def callback_inline(call):
             if call.data == 'data1':
                 today1 = day(1)
                 if call.message.chat.id in test1:
+                        today1 = day(1)
                         if today1 == 0:
                             img = open('pic/monday.png', 'rb')
                             bot.send_photo(call.message.chat.id, img)
@@ -195,6 +195,7 @@ def callback_inline(call):
                         else:
                             bot.send_message(call.message.chat.id, "Ошибка")
                 elif call.message.chat.id in test3:
+                        today1 = day(1)
                         if today1 == 0:
                             img = open('pic1/monday.png', 'rb')
                             bot.send_photo(call.message.chat.id, img)
@@ -219,6 +220,7 @@ def callback_inline(call):
                         else:
                             bot.send_message(call.message.chat.id, "Ошибка")
                 elif call.message.chat.id in test5:
+                        today1 = day(1)
                         if today1 == 0:
                             img = open('pic2/monday.png', 'rb')
                             bot.send_photo(call.message.chat.id, img)
@@ -243,6 +245,7 @@ def callback_inline(call):
                         else:
                             bot.send_message(call.message.chat.id, "Ошибка")
                 elif call.message.chat.id in test7:
+                        today1 = day(1)
                         if today1 == 0:
                             img = open('pic3/monday.png', 'rb')
                             bot.send_photo(call.message.chat.id, img)
@@ -269,6 +272,7 @@ def callback_inline(call):
             elif call.data == 'data2':
                 today1 = day(1)
                 if call.message.chat.id in test1:
+                    today1 = day(1)
                     if today1 == 6:
                         img = open('pic/monday.png', 'rb')
                         bot.send_photo(call.message.chat.id, img)
@@ -293,6 +297,7 @@ def callback_inline(call):
                     else:
                         bot.send_message(call.message.chat.id, "Ошибка")
                 elif call.message.chat.id in test3:
+                    today1 = day(1)
                     if today1 == 6:
                         img = open('pic1/monday.png', 'rb')
                         bot.send_photo(call.message.chat.id, img)
@@ -317,6 +322,7 @@ def callback_inline(call):
                     else:
                         bot.send_message(call.message.chat.id, "Ошибка")
                 elif call.message.chat.id in test5:
+                    today1 = day(1)
                     if today1 == 6:
                         img = open('pic2/monday.png', 'rb')
                         bot.send_photo(call.message.chat.id, img)
@@ -341,6 +347,7 @@ def callback_inline(call):
                     else:
                         bot.send_message(call.message.chat.id, "Ошибка")
                 elif call.message.chat.id in test7:
+                    today1 = day(1)
                     if today1 == 6:
                         img = open('pic3/monday.png', 'rb')
                         bot.send_photo(call.message.chat.id, img)
