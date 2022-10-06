@@ -155,7 +155,7 @@ def menu(message):
 def callback_inline(call):
     try:
         if call.message:
-            
+            today1 = day(1)
             with open('data/atom.txt', 'r', encoding='UTF-8') as fa: ## Открываем файл
                 test = list(fa) ## Помещаем в список.
                 test1 = list(map(int, test))
@@ -169,7 +169,6 @@ def callback_inline(call):
                 test6 = list(farad) ## Помещаем в список.
                 test7= list(map(int, test6))
             if call.data == 'data1':
-                today1 = day(1)
                 if call.message.chat.id in test1:
                         if today1 == 0:
                             img = open('pic/monday.png', 'rb')
