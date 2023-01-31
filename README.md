@@ -3,5 +3,5 @@
 	<img
 		width="300"
 		alt="mephiio-bot"
-		src="https://raw.githubusercontent.com/thelounge/thelounge/master/client/img/logo-vertical-transparent-bg.svg?sanitize=true">
+		src="https://github.com/munnificent/mephiio-bot/blob/main/Mephisti-logo.png?raw=true">
 </h1>
