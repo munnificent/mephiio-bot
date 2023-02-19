@@ -3,6 +3,7 @@ import pendulum
 import telebot
 import sys
 from telebot import types
+
 API_TOKEN ="5977431904:AAEOhW9tVQDGljpWo5GM3Pb-aQ4UGLFH924"
 admins = [736503376]
 
@@ -53,7 +54,7 @@ def handle_start(message):
     with open("stick/welcome.tgs", "rb") as sticker:
         bot.send_sticker(message.chat.id, sticker)
 
-@bot.message_handler(commands=['schedule'])
+@bot.message_handler(commands=['today'])
 def handle_schedule(message):
     user_id = message.chat.id
     handle_message(user_id, message)
