@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "schedule bot"
+version = "0.1.0"
+description = "Bot telegram that send shedule"
+authors = ["Your Name <kosmozsaranec954@example.com>"]
+license = "mit"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pendulum = "^2.1.2"
+pillow = "^10.0.0"
+pytelegrambotapi = "^4.12.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
