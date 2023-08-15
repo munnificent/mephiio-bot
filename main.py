@@ -94,7 +94,7 @@ def get_next_lesson(current_day, student_group, time_formatted):
         return cursor.fetchone()
 
 def generate_schedule_image(telegram_chat_id, current_day):
-    # Загрузка случайного фонового изображения 600 на 400 размер
+    # Загрузка случайного фонового изображения 1200 на 675 размер
     backgrounds = os.listdir(BACKGROUND_DIR)
     background_image = random.choice(backgrounds)
     background_path = os.path.join(BACKGROUND_DIR, background_image)
@@ -116,9 +116,10 @@ def generate_schedule_image(telegram_chat_id, current_day):
 
 
     # Шрифт и размеры текста
-    font_path = os.path.join(FONT_DIR, 'phageregularkg.ttf')
-    font = ImageFont.truetype(font_path, 20)
-    header_font = ImageFont.truetype(font_path, 16)
+    font_path = os.path.join(FONT_DIR, 'SANTELLO.ttf')
+    font = ImageFont.truetype(font_path, 22)
+    header_font = ImageFont.truetype(font_path, 24)
+    
 
     # Заголовки таблицы
     headers = ["Начало", "Конец", "Предмет", "Аудитория", "Преподаватель"]
@@ -127,16 +128,16 @@ def generate_schedule_image(telegram_chat_id, current_day):
     for i, header in enumerate(headers):
         x = table_x + cell_width * i
         y = table_y
-        draw.rectangle([(x, y), (x + cell_width, y + cell_height)], outline='black', fill='lightgray')
-        draw.text((x + 10, y + 10  ), header, font=header_font, fill='black')
+        draw.rectangle([(x, y), (x + cell_width, y + cell_height)], outline=color_cell, fill=color_header)
+        draw.text((x + 10, y + 10  ), header, font=header_font, fill=color_text1)
 
     # Отрисовка расписания
     for i, entry in enumerate(schedule):
         for j, value in enumerate(entry):
             x = table_x + cell_width * j
             y = table_y + cell_height * (i + 1)
-            draw.rectangle([(x, y), (x + cell_width, y + cell_height)], outline='black', fill='white')
-            draw.text((x + 10, y + 10), str(value), font=font, fill='black')
+            draw.rectangle([(x, y), (x + cell_width, y + cell_height)], outline=color_cell, fill=color_tab)
+            draw.text((x + 10, y + 10), str(value), font=font, fill=color_text2)
 
     # Создание объекта BytesIO для хранения изображения в памяти
     image_bytes = BytesIO()
@@ -175,7 +176,7 @@ def handle_message(message):
         timezone = pendulum.timezone("Asia/Almaty")
         current_day = pendulum.now(timezone).format("dddd")
         current_day = weekdays[current_day]
-        bot.send_message(message.chat.id, "Расписание на завтра:")
+        bot.send_message(message.chat.id, "Расписание на сегодня:")
         try:
             schedule_image = generate_schedule_image(message.chat.id, current_day)
             send_image_to_telegram(message.chat.id, schedule_image)

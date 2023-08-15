@@ -11,3 +11,8 @@ weekdays = {
     "Sunday": "Воскресенье"
 }
 FONT_DIR = "font"
+color_header = '#060A0D'
+color_text1 = '#F2F2F2'
+color_text2 = '#F2F2F2'
+color_cell = '#060A0D'
+color_tab = '#1B418C'
