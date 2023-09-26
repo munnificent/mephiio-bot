@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 bot = telebot.TeleBot(TOKEN)
 
 # Список идентификаторов администраторов
-admin_ids = [6222762191]
+admin_ids = [6222762191, 736503376]
 
 # Обработчик команды от администратора
 @bot.message_handler(commands=['send'])
@@ -149,7 +149,7 @@ def generate_schedule_image(telegram_chat_id, current_day):
 # Start command handler
 @bot.message_handler(commands=['start'])
 def start_handler(message):
-    bot.send_message(message.chat.id, f"Привет, {message.from_user.first_name}!")
+    bot.send_message(message.chat.id, f"Привет {message.from_user.first_name}! Я бот-рассыльщик расписания и уведомлений Университета КазНПУ. Я готов помочь тебе быть в курсе всех актуальных событий и изменений в учебном процессе. Для получения информации просто обратись ко мне. Давай вместе сделаем твою учебу более организованной и успешной!")
     stickers = os.listdir('stic')
     sticker = open(os.path.join('stic', random.choice(stickers)), 'rb')
     bot.send_sticker(message.chat.id, sticker)
@@ -183,7 +183,7 @@ def handle_message(message):
         except Exception as e:
             logger.error("Error generating schedule image: %s", str(e))
             bot.send_message(message.chat.id, "An error occurred while generating the schedule image.")
-            bot.send_message(message.chat.id, " Возможно вас нет в базе   ")
+            bot.send_message(message.chat.id, " Возможно вас нет в базе, обратитесь к @munificent_archon   ")
 
     elif message.text == "Расписание на завтра":
         timezone = pendulum.timezone("Asia/Almaty")
