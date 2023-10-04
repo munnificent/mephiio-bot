@@ -1,6 +1,6 @@
 DATABASE_FILE = "test.db" # Путь к файлу базы данных
 BACKGROUND_DIR = "backgrounds"  # Путь к директории с фонами
-TOKEN = '5977431904:AAEOhW9tVQDGljpWo5GM3Pb-aQ4UGLFH924' #токен бота
+TOKEN = '6439330533:AAHJY1rPwXObC9zVwUQJY4TfLAsIiSOYzyg' #токен бота
 weekdays = {
     "Monday": "Понедельник",
     "Tuesday": "Вторник",
